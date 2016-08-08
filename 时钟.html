@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #000000;
+        }
+        #div1{
+            margin: 100px auto;  position:absolute; left:100px;top:100px;
+            width:300px;  height:300px;  border:2px solid black;
+            box-shadow: 1px 2px 100px #FFF;
+            text-shadow: 2px 3px 6px #000;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 300px;
+            font-size: 50px;
+            color:#7D7DFF;
+            font-weight: bold;
+        }
+        #div1 .hour{  width:14px;  height:74px;  background: #000000;  position: absolute;
+            left:50%;
+            top:50%;
+            margin-left:-7px; margin-top:-74px;
+            transform-origin: center bottom;
+            border-radius: 50% 50% 0 0 ;
+        }
+        #div1 .min{  width:10px;  height:90px;  background: #000000;  position: absolute;
+            left:50%;
+            top:50%;
+            margin-left: -5px;
+            margin-top: -90px;
+            transform-origin: center bottom;
+            border-radius: 50% 50% 0 0 ;
+
+        }
+        #div1 .sec{  width:6px;  height:110px;  background: red;  position: absolute;
+            left:50%;
+            top:50%;
+            margin-left: -3px;
+            margin-top: -110px;
+            transform-origin: center bottom;
+            border-radius: 50% 50% 0 0 ;
+        }
+        #div1 .cap{
+            width:30px;  height:30px;  background: #000000;  border-radius: 50%;  position: absolute;
+            left:50%;
+            top:50%;
+            margin-left: -15px;
+            margin-top: -15px;
+        }
+        #div1 span{
+            position: absolute;left:50%;top:0;margin-left: -2px;width:2px ;height:8px;background: #000000;
+            transform-origin:center 150px;
+        }
+        #div1 span em{
+            position: absolute;left:50%;top:10px;margin-left:-20px;width:40px;height:40px;text-align: center;
+            line-height:40px;font-style:normal;
+            font-size: 30px;font-weight: bold;
+        }
+        #div1 span.on{
+            height:12px;
+        }
+    </style>
+    <script>
+        function rng(n,m){
+            return parseInt(Math.random()*(m-n)+n);
+        };
+        window.onload=function(){
+            var oDiv=document.getElementById('div1');
+            var oH=oDiv.querySelector(".hour");
+            var oM=oDiv.querySelector(".min");
+            var oS=oDiv.querySelector(".sec");
+            var oC=oDiv.querySelector(".cap");
+            var aSpan=document.getElementsByTagName('span');
+            var em=document.getElementsByTagName('em');
+
+            function clock(){
+                var oDate=new Date();
+                var iH=oDate.getHours();
+                var iM=oDate.getMinutes();
+                var iS=oDate.getSeconds();
+                var iMs = oDate.getMilliseconds();
+
+                oH.style.transform="rotate("+(iH*30+iM/60*30)+"deg)";
+                oM.style.transform="rotate("+(iM*6+iS/60*6)+"deg)";
+                oS.style.transform="rotate("+(iS*6+iMs/1000*6)+"deg)";
+            }
+            function color(){
+                oDiv.style.background="rgb("+rng(0,256)+","+rng(0,256)+","+rng(0,256)+")";
+                oH.style.background="rgb("+rng(0,256)+","+rng(0,256)+","+rng(0,256)+")";
+                oC.style.background="rgb("+rng(0,256)+","+rng(0,256)+","+rng(0,256)+")";
+                oS.style.background="rgb("+rng(0,256)+","+rng(0,256)+","+rng(0,256)+")";
+                oM.style.background="rgb("+rng(0,256)+","+rng(0,256)+","+rng(0,256)+")";
+//                aSpan.style.background="rgb("+rng(0,256)+","+rng(0,256)+","+rng(0,256)+")";
+                for(var i=0;i<aSpan.length;i++){
+                    aSpan[i].style.background="rgb("+rng(0,256)+","+rng(0,256)+","+rng(0,256)+")";
+                }
+                for(var i=0;i<em.length;i++){
+                      em[i].style.color="rgb("+rng(0,256)+","+rng(0,256)+","+rng(0,256)+")";
+                }
+            };
+            color();
+            clock();
+            setInterval(clock,1000);
+            setInterval(color,1000);
+
+
+            for(var i=0;i<60;i++){
+                var oSpan=document.createElement("span");
+                oDiv.appendChild(oSpan);
+
+                if(i%5==0){
+                    oSpan.classList.add("on");
+                    oSpan.innerHTML="<em>"+(i==0?12:i/5)+"</em>";
+                    oSpan.children[0].style.transform = "rotate("+-i*6+"deg)";
+                }
+                oSpan.style.transform = "rotate("+i*6+"deg)";
+            }
+            oDiv.onmousedown=function(ev){
+                var oEvent=ev||event;
+                var disX=oEvent.clientX-oDiv.offsetLeft;
+                var disY=oEvent.clientY-oDiv.offsetTop;
+                document.onmousemove=function(ev){
+                    var oEvent=ev||event;
+                    oDiv.style.left=oEvent.clientX-disX+"px";
+                    oDiv.style.top=oEvent.clientY-disY+"px";
+                };
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+                return false
+            };
+
+        }
+    </script>
+</head>
+<body>
+<div id="div1">L❤VE
+    <div class="hour"></div>
+    <div class="min"></div>
+    <div class="sec"></div>
+    <div class="cap"></div>
+</div>
+</body>
+</html>
