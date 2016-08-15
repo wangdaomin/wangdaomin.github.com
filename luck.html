@@ -64,8 +64,8 @@
             border-radius:  0 0 70% 70%;
             z-index: 1;
             transform-origin: center top;
-            transform: rotate(36deg);
-            transition: 1s all ease;
+            transform: rotateZ(36deg);
+
         }
         strong{
             width:14px;
@@ -85,7 +85,7 @@
             height:190px;
             border:2px solid #00ff88;
             transform-origin:center 189px;
-            transition: 3s all ease-in-out;
+            transition: 10s all ease-in-out;
         }
         span em{
             text-align: center;
@@ -116,6 +116,7 @@
             var em=aSpan.children;
             var aStrong=document.getElementsByTagName('strong');
              var timer=null;
+            var n=0;
             for(var i=0;i<30;i++){
                 var oStrong=document.createElement('strong');
                 oBig.appendChild(oStrong);
@@ -148,8 +149,17 @@
                         aStrong[i].style.background="rgb("+rnd(0,256)+","+rnd(0,256)+","+rnd(0,256)+")"
                     }
                 },200);
+                    n=rnd(360,3600);
 
-                   oC.style.transform="rotate("+rnd(2,30000)+"deg)";
+                   oC.style.transform="rotateZ("+n+"deg)";
+                oC.style.transition="5s all ease-in-out";
+                    console.log(n);
+                   oC.addEventListener("transitionend",function(){
+                       oC.style.transition="none";
+                       n=n%360;
+                       oC.style.transform="rotateZ("+n+"deg)";
+                       console.log(n);
+                   },false)
 
 
             }
@@ -158,7 +168,7 @@
     </script>
 </head>
 <body>
-<audio src="MP3/财神到.mp3" autoplay loop>财神到</audio>
+<audio  autoplay loop src="MP3/财神到.mp3">财神到</audio>
 <div id="box">
     <div id="big"></div>
     <div id="middle"></div>
