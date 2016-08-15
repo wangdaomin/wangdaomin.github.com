@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding:0;margin:0;list-style: none;
+        }
+        #box{
+            width:1366px;
+            height:628px;
+            background: black;
+            position: relative;
+        }
+        #big{
+            width:500px;
+            height:500px;
+            background: #cc0d21;
+            position: absolute;
+            left:450px;
+            top:60px;
+            border-radius: 50%;
+            border:8px solid orangered;
+            box-shadow: 1px 2px 10px #fff;
+        }
+        #middle{
+            width:380px;
+            height:380px;
+            background: #cdcb21;
+            position: absolute;
+            left:520px;
+            top:132px;
+            border-radius: 50%;
+            box-shadow: 0px 0px 20px #ba8cff
+        }
+        #small{
+            cursor: pointer;
+            border: 2px solid #f1f1f1;
+            box-shadow: 1px 2px 18px black;
+            width:100px;
+            height:100px;
+            background: coral;
+            position: absolute;
+            left:654px;
+            top:274px;
+            border-radius: 50%;
+            font-size: 37px;
+            text-align: center;
+            font-weight: bold;
+            color: #fff02e;
+            text-shadow: 1px 2px 10px black;
+            z-index: 2;
+        }
+        #center{
+            border: 2px solid #f1f1f1;
+            box-shadow: 1px 2px 20px #fff;
+            width:26px;
+            height:150px;
+            background:#F16D1E;
+            position: absolute;
+            left:697px;
+            top:322px;
+            border-radius:  0 0 70% 70%;
+            z-index: 1;
+            transform-origin: center top;
+            transform: rotate(36deg);
+            transition: 1s all ease;
+        }
+        strong{
+            width:14px;
+            height:14px;
+            background: #ccb832;
+            position: absolute;
+            left:50%;
+            top:26px;
+            border-radius: 50%;
+            box-shadow: 0 0 3px #fff;
+            transform-origin:center 228px;
+        }
+        span{
+            position: absolute;
+            left:50%;
+            top:0;
+            height:190px;
+            border:2px solid #00ff88;
+            transform-origin:center 189px;
+            transition: 3s all ease-in-out;
+        }
+        span em{
+            text-align: center;
+            line-height: 50px;;
+            font-size: 26px;
+            color:red;
+            text-shadow: 1px 2px 6px #000;
+            position: absolute;
+            left:50%;
+            top:15px;
+            width:60px;
+            height:200px;
+        }
+
+    </style>
+    <script>
+        function rnd(n,m){
+            return parseInt(Math.random()*(m-n)+n);
+        }
+
+        window.onload=function(){
+            var oBox=document.getElementById('box');
+            var oBig=document.getElementById('big');
+            var oM=document.getElementById('middle');
+            var oS=document.getElementById('small');
+            var oC=document.getElementById('center');
+            var aSpan=document.getElementsByTagName('span');
+            var em=aSpan.children;
+            var aStrong=document.getElementsByTagName('strong');
+             var timer=null;
+            for(var i=0;i<30;i++){
+                var oStrong=document.createElement('strong');
+                oBig.appendChild(oStrong);
+                oStrong.style.transform='rotate('+i*12+'deg)';
+
+            }
+
+
+            for(var i=0;i<10;i++){
+                var oSpan=document.createElement('span');
+                oM.appendChild(oSpan);
+                oSpan.style.transform='rotate('+i*36+'deg)';
+
+            }
+            aSpan[0].innerHTML="<em >谢谢参与</em>";
+            aSpan[1].innerHTML="<em>￥666</em>";
+            aSpan[2].innerHTML="<em>￥88</em>";
+            aSpan[3].innerHTML="<em>￥8</em>";
+            aSpan[4].innerHTML="<em >谢谢参与</em>";
+            aSpan[5].innerHTML="<em>￥888</em>";
+            aSpan[6].innerHTML="<em>￥6</em>";
+            aSpan[7].innerHTML="<em>谢谢参与</em>";
+            aSpan[8].innerHTML="<em>￥8888</em>";
+            aSpan[9].innerHTML="<em>￥888</em>";
+
+            oS.onclick=function(){
+                clearInterval(timer);
+              timer=setInterval(function(){
+                    for(var i=0;i<aStrong.length;i++){
+                        aStrong[i].style.background="rgb("+rnd(0,256)+","+rnd(0,256)+","+rnd(0,256)+")"
+                    }
+                },200);
+
+                   oC.style.transform="rotate("+rnd(2,30000)+"deg)";
+
+
+            }
+
+        }
+    </script>
+</head>
+<body>
+<audio src="MP3/财神到.mp3" autoplay loop>财神到</audio>
+<div id="box">
+    <div id="big"></div>
+    <div id="middle"></div>
+    <div id="small">点击抽奖</div>
+    <div id="center"></div>
+</div>
+</body>
+</html>
